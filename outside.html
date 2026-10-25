@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="sv">
 
@@ -69,34 +68,39 @@
       line-height: 1.4;
     }
 
-    /* BILDER */
+    /* BILDER – symmetriskt block
+       Varje rad fyller hela bredden och alla bilder i en rad
+       har exakt samma höjd. Raderna har nästan samma höjd,
+       så kanterna blir raka överst, nederst och på sidorna. */
 
     .gallery {
-      display: grid;
+      display: flex;
+      flex-direction: column;
       gap: var(--gap);
       margin-top: clamp(2.5rem, 6vw, 4.5rem);
     }
 
-    .gallery--landscape {
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-    }
-
-    .gallery--portrait {
-      grid-template-columns: repeat(5, minmax(0, 1fr));
+    .row {
+      display: flex;
+      gap: var(--gap);
     }
 
     .tile {
       margin: 0;
+      min-width: 0;
       overflow: hidden;
       background: var(--tile-bg);
     }
 
-    .gallery--landscape .tile {
-      aspect-ratio: 3 / 2;
+    /* stående = 2:3, liggande = 3:2 */
+    .tile--p {
+      flex: 2 1 0;
+      aspect-ratio: 2 / 3;
     }
 
-    .gallery--portrait .tile {
-      aspect-ratio: 2 / 3;
+    .tile--l {
+      flex: 3 1 0;
+      aspect-ratio: 3 / 2;
     }
 
     .tile img {
@@ -113,27 +117,27 @@
         width: 84vw;
         padding-top: 16vh;
       }
-
-      .gallery--landscape {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-
-      .gallery--portrait {
-        grid-template-columns: repeat(4, minmax(0, 1fr));
-      }
     }
 
+    /* Mobil: jämnt rutnät med kvadratiska bilder (3 per rad, 33 bilder = 11 rader) */
     @media (max-width: 600px) {
       .outside {
         width: 88vw;
       }
 
-      .gallery--landscape {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
+      .gallery {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
       }
 
-      .gallery--portrait {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+      .row {
+        display: contents;
+      }
+
+      .tile--p,
+      .tile--l {
+        flex: none;
+        aspect-ratio: 1 / 1;
       }
     }
   </style>
@@ -174,48 +178,74 @@
       </p>
     </div>
 
-    <!-- LIGGANDE BILDER: PNG -->
+    <!--
+      SYMMETRISKT GALLERI
+      .tile--p = stående bild, .tile--l = liggande bild.
+      Du kan byta plats på bilder INOM en rad fritt.
+      Byter du plats mellan rader: behåll samma antal stående/liggande per rad
+      (rad 1, 2, 5: 4 stående + 2 liggande. Rad 3, 4: 2 stående + 3 liggande.
+      Rad 6: 3 stående + 2 liggande), annars blir raderna olika höga.
+    -->
 
-    <section class="gallery gallery--landscape" aria-label="Bilder, liggande">
-      <figure class="tile"><img src="bilder/liggande/06.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/liggande/07.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/liggande/04.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/liggande/12.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/liggande/11.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/liggande/08.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/liggande/01.png" alt="" loading="lazy" decoding="async"></figure>      
-      <figure class="tile"><img src="bilder/liggande/02.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/liggande/03.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/liggande/05.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/liggande/09.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/liggande/10.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/liggande/13.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/liggande/14.png" alt="" loading="lazy" decoding="async"></figure>
-    </section>
+    <section class="gallery" aria-label="Bilder">
 
-    <!-- STÅENDE BILDER: PNG -->
+      <!-- Rad 1 -->
+      <div class="row">
+        <figure class="tile tile--p"><img src="bilder/staende/s.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--l"><img src="bilder/liggande/06.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--p"><img src="bilder/staende/j.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--p"><img src="bilder/staende/o.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--l"><img src="bilder/liggande/07.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--p"><img src="bilder/staende/a.png" alt="" loading="lazy" decoding="async"></figure>
+      </div>
 
-    <section class="gallery gallery--portrait" aria-label="Bilder, stående">
-      <figure class="tile"><img src="bilder/staende/s.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/staende/j.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/staende/o.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/staende/a.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/staende/b.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/staende/c.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/staende/d.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/staende/e.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/staende/f.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/staende/g.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/staende/h.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/staende/i.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/staende/k.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/staende/l.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/staende/m.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/staende/n.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/staende/p.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/staende/q.png" alt="" loading="lazy" decoding="async"></figure>
-      <figure class="tile"><img src="bilder/staende/r.png" alt="" loading="lazy" decoding="async"></figure>
-   
+      <!-- Rad 2 -->
+      <div class="row">
+        <figure class="tile tile--p"><img src="bilder/staende/b.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--p"><img src="bilder/staende/c.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--l"><img src="bilder/liggande/04.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--p"><img src="bilder/staende/d.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--p"><img src="bilder/staende/e.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--l"><img src="bilder/liggande/12.png" alt="" loading="lazy" decoding="async"></figure>
+      </div>
+
+      <!-- Rad 3 -->
+      <div class="row">
+        <figure class="tile tile--l"><img src="bilder/liggande/11.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--p"><img src="bilder/staende/f.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--l"><img src="bilder/liggande/08.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--p"><img src="bilder/staende/g.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--l"><img src="bilder/liggande/01.png" alt="" loading="lazy" decoding="async"></figure>
+      </div>
+
+      <!-- Rad 4 -->
+      <div class="row">
+        <figure class="tile tile--p"><img src="bilder/staende/h.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--l"><img src="bilder/liggande/02.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--l"><img src="bilder/liggande/03.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--p"><img src="bilder/staende/i.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--l"><img src="bilder/liggande/05.png" alt="" loading="lazy" decoding="async"></figure>
+      </div>
+
+      <!-- Rad 5 -->
+      <div class="row">
+        <figure class="tile tile--p"><img src="bilder/staende/k.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--l"><img src="bilder/liggande/09.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--p"><img src="bilder/staende/l.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--p"><img src="bilder/staende/m.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--l"><img src="bilder/liggande/10.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--p"><img src="bilder/staende/n.png" alt="" loading="lazy" decoding="async"></figure>
+      </div>
+
+      <!-- Rad 6 -->
+      <div class="row">
+        <figure class="tile tile--p"><img src="bilder/staende/p.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--l"><img src="bilder/liggande/13.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--p"><img src="bilder/staende/q.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--l"><img src="bilder/liggande/14.png" alt="" loading="lazy" decoding="async"></figure>
+        <figure class="tile tile--p"><img src="bilder/staende/r.png" alt="" loading="lazy" decoding="async"></figure>
+      </div>
+
     </section>
 
   </main>
