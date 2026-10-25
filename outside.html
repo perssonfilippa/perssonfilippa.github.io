@@ -44,6 +44,56 @@
       font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
     }
 
+    /* < Back: länk tillbaka till About, ovanför rubriken */
+    .outside__back {
+      display: inline-flex;
+      align-items: baseline;      /* pilen står på textens baslinje */
+      gap: 0.55rem;
+      margin: 0 0 1.4rem;
+      color: var(--heading);
+      font-weight: 400;
+      font-size: clamp(0.95rem, 1.2vw, 1.15rem);
+      line-height: 1.3;
+      text-decoration: none;
+      transition: opacity .2s ease;
+    }
+
+    .outside__back:hover,
+    .outside__back:focus-visible {
+      opacity: .55;
+    }
+
+    .outside__back:focus-visible {
+      outline: 2px solid var(--heading);
+      outline-offset: 4px;
+    }
+
+    .outside__back-icon {
+      flex: none;
+      display: block;
+      height: 0.7em;              /* ungefär versalhöjden i äldre webbläsare */
+      transition: transform .25s ease;
+    }
+
+    @supports (height: 1cap) {
+      .outside__back-icon { height: 1cap; }
+    }
+
+    .outside__back-icon svg {
+      display: block;
+      height: 100%;
+      width: auto;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .outside__back:hover .outside__back-icon {
+      transform: translateX(-0.3em);
+    }
+
     .outside__heading {
       margin: 0 0 1rem;
       color: var(--heading);
@@ -146,6 +196,11 @@
         break-inside: avoid;
       }
     }
+
+    @media (prefers-reduced-motion: reduce) {
+      .outside__back,
+      .outside__back-icon { transition: none; }
+    }
   </style>
 </head>
 
@@ -161,6 +216,13 @@
   </nav>
 
   <main class="outside">
+
+    <a class="outside__back" href="about.html">
+      <span class="outside__back-icon" aria-hidden="true">
+        <svg viewBox="0 0 7.2 14"><polyline points="6.6 0.6 0.6 7 6.6 13.4"></polyline></svg>
+      </span>
+      <span>Back</span>
+    </a>
 
     <h1 class="outside__heading">
       Outside studies or a full-time job
