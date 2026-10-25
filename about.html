@@ -189,7 +189,7 @@
       word-spacing: 0.08em;     /* luft mellan orden så att de inte smälter ihop */
       display: flex;
       justify-content: space-between;
-      align-items: center;
+      align-items: baseline;   /* pilen ligger på första radens baslinje, även när texten radbryter */
       gap: 1.2rem;
       width: 100%;
       margin: 0;
@@ -210,30 +210,33 @@
       outline-offset: 4px;
     }
 
-    /* Plus i en cirkel som blir ett kryss när texten är öppen */
+    /* Pil (>) åt höger, utan ring. Nederkanten ligger på första radens baslinje och
+       höjden är lika med versalhöjden (1cap), så pilen står på samma höjd som första raden.
+       Äldre webbläsare får ungefär samma höjd via 0.7em. */
     .about__more-icon {
       flex: none;
-      display: grid;
-      place-items: center;
-      width: 2.4rem;
-      height: 2.4rem;
-      border: 1.5px solid var(--heading);
-      border-radius: 50%;
-      transition: background .2s ease, color .2s ease, transform .3s ease;
+      display: block;
+      height: 0.7em;
+      transition: transform .25s ease;
+    }
+
+    @supports (height: 1cap) {
+      .about__more-icon { height: 1cap; }
     }
 
     .about__more-icon svg {
-      width: 14px;
-      height: 14px;
+      display: block;
+      height: 100%;
+      width: auto;
       fill: none;
       stroke: currentColor;
-      stroke-width: 2.4;
+      stroke-width: 1.2;          /* tunn linje, lättare än rubrikens vikt */
       stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .about__more-toggle:hover .about__more-icon {
-      background: var(--heading);
-      color: var(--bg);
+      transform: translateX(0.3em);
     }
 
     /* =========================
@@ -463,7 +466,7 @@
       <a class="about__more about__more-toggle" href="outside.html">
         <span>Who is Filippa outside of her studies or a full-time job?</span>
         <span class="about__more-icon" aria-hidden="true">
-          <svg viewBox="0 0 24 24"><line x1="12" y1="4" x2="12" y2="20"></line><line x1="4" y1="12" x2="20" y2="12"></line></svg>
+          <svg viewBox="0 0 7.2 14"><polyline points="0.6 0.6 6.6 7 0.6 13.4"></polyline></svg>
         </span>
       </a>
     </section>

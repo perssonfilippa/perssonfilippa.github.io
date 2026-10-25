@@ -56,8 +56,10 @@
       word-spacing: 0.08em;
     }
 
+    /* texten är lika bred som bildblocket */
     .outside__text {
-      max-width: 44rem;
+      max-width: none;
+      width: 100%;
     }
 
     .outside__text p {
@@ -93,13 +95,15 @@
     }
 
     /* stående = 2:3, liggande = 3:2 */
+    /* Bredden fördelas efter bildernas format (2/3 : 3/2 = 4 : 9),
+       så att alla bilder i en rad blir lika höga och behåller sitt format. */
     .tile--p {
-      flex: 2 1 0;
+      flex: 4 1 0;
       aspect-ratio: 2 / 3;
     }
 
     .tile--l {
-      flex: 3 1 0;
+      flex: 9 1 0;
       aspect-ratio: 3 / 2;
     }
 
@@ -119,15 +123,16 @@
       }
     }
 
-    /* Mobil: jämnt rutnät med kvadratiska bilder (3 per rad, 33 bilder = 11 rader) */
+    /* Mobil: bilderna behåller sitt format och ligger i två kolumner */
     @media (max-width: 600px) {
       .outside {
         width: 88vw;
       }
 
       .gallery {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        display: block;
+        column-count: 2;
+        column-gap: var(--gap);
       }
 
       .row {
@@ -137,7 +142,8 @@
       .tile--p,
       .tile--l {
         flex: none;
-        aspect-ratio: 1 / 1;
+        margin-bottom: var(--gap);
+        break-inside: avoid;
       }
     }
   </style>
