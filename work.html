@@ -180,28 +180,36 @@
 
     .item__toggle[aria-expanded="true"] .v { transform: scaleY(0); }
 
-    /* Close-knappen i panelen */
+    /* Close-knappen i panelen: bara text med ett minus till vänster */
     .panel__close {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.45rem 1.1rem;
-      border: 1px solid var(--green);
-      border-radius: 999px;
-      background: transparent;
+      gap: 0.55rem;
+      padding: 0.2rem 0;
+      border: 0;
+      background: none;
       color: var(--green);
       font: inherit;
       font-weight: 500;
-      font-size: 0.85rem;
+      font-size: 0.95rem;
       cursor: pointer;
-      transition: background .2s ease, color .2s ease;
+      transition: color .2s ease;
     }
 
-    .panel__close:hover { background: var(--green); color: #fff; }
+    .panel__close:hover { color: #000; }
 
     .panel__close:focus-visible {
       outline: 2px solid #000;
       outline-offset: 4px;
+    }
+
+    .panel__close svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 2.4;
+      stroke-linecap: round;
     }
 
     /* =========================
@@ -658,7 +666,10 @@
   <!-- Panel från sidan: fylls med projektets text när man klickar Explore -->
   <div class="panel-shade" id="panelShade"></div>
   <aside class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="panelTitle" inert>
-    <button class="panel__close" id="panelClose" type="button">Close</button>
+    <button class="panel__close" id="panelClose" type="button">
+      <svg viewBox="0 0 24 24" aria-hidden="true"><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+      <span>Close</span>
+    </button>
     <p class="panel__year" id="panelYear"></p>
     <h2 class="panel__title" id="panelTitle"></h2>
     <div class="panel__body" id="panelBody"></div>
