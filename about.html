@@ -90,6 +90,8 @@
     .more-row .about__more {
       grid-column: 2;
       margin-top: 0;
+      border-top: 0;
+      padding: 0;                  /* lika mycket luft ovan och under, så texten hamnar exakt mitt i */
     }
 
     /* =========================
@@ -164,6 +166,10 @@
       transition: opacity .2s ease;
     }
 
+    .about__contact a + a {
+      margin-top: 0.4rem;               /* lite mer luft mellan e-postadressen och LinkedIn */
+    }
+
     .about__contact a:hover,
     .about__contact a:focus-visible {
       opacity: .55;
@@ -201,6 +207,10 @@
       font-weight: 300;
       font-size: clamp(0.95rem, 1.2vw, 1.15rem);
       line-height: 1.4;
+    }
+
+    .about__text p:last-child {
+      margin-bottom: 0;            /* ingen extra luft under sista stycket, annars hamnar länken för långt ner */
     }
 
     /* =========================
