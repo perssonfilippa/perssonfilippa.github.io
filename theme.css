@@ -85,14 +85,14 @@
   
   .bw-toggle {
     position: fixed;
-    left: clamp(1rem, 2.2vw, 1.75rem);
-    bottom: clamp(1rem, 2.2vw, 1.75rem);
+    left: var(--corner-gap);
+    bottom: var(--corner-gap);
     z-index: 50;
   
     display: grid;
     place-items: center;
-    width: 2.5rem;
-    height: 2.5rem;
+    width: var(--corner-size);
+    height: var(--corner-size);
     padding: 0;
   
     border: 1.5px solid var(--nav-color, #ECEDE9);
@@ -105,8 +105,35 @@
   
   .bw-toggle svg {
     display: block;
-    width: 1.2rem;
-    height: 1.2rem;
+    width: 50%;
+    height: 50%;
+  }
+  
+  /* =========================
+     HÖRNIKONERNA
+     Svartvitt-knappen (vänster) och back-to-top (höger) delar samma storlek
+     och samma avstånd till kanten och botten, så de ligger exakt i linje.
+     Ändra bara här.
+  ========================= */
+  
+  :root {
+    --corner-gap: 2rem;     /* avstånd till sidan och till botten */
+    --corner-size: 48px;    /* storlek på båda */
+  }
+  
+  @media (max-width: 900px) {
+    :root {
+      --corner-gap: 1.5rem;
+      --corner-size: 42px;
+    }
+  }
+  
+  /* "html" framför gör att den vinner över sidans egna värden */
+  html .scroll-to-top {
+    right: var(--corner-gap);
+    bottom: var(--corner-gap);
+    width: var(--corner-size);
+    height: var(--corner-size);
   }
   
   .bw-toggle:hover,

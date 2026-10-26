@@ -2,9 +2,6 @@
 <html lang="sv">
 
 <head>
-  <link rel="stylesheet" href="theme.css">
-<script src="theme.js"></script>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#949139">
@@ -22,6 +19,8 @@
   >
 
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="theme.js"></script>
 
   <style>
   :root { --nav-color: #ECEDE9; }
@@ -61,6 +60,13 @@
       padding: 20vh 0 10vh;
 
       font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+
+      /* Så mycket av korten som sticker upp längst ner i fönstret
+         när man står högst upp på sidan (högre = mer synligt). */
+      --cards-peek: 1.1rem;
+      box-sizing: border-box;
+      min-height: calc(100vh - var(--cards-peek));
+      min-height: calc(100svh - var(--cards-peek));
     }
 
     /* =========================
@@ -271,8 +277,9 @@
     }
 
     /* Hovra (eller fokusera med tangentbord) = pausa */
-    .marquee:hover .marquee__track,
-    .marquee:focus-within .marquee__track {
+    /* (Reservlösning utan script. Med script styr .js-rate farten mjukt, se längst ner.) */
+    .marquee:not(.js-rate):hover .marquee__track,
+    .marquee:not(.js-rate):focus-within .marquee__track {
       animation-play-state: paused;
     }
 
@@ -616,6 +623,55 @@
     }
     new ResizeObserver(layoutPhoto).observe(wrapEl);
     window.addEventListener('resize', layoutPhoto);
+  </script>
+
+  <script>
+    // Citatraden: stannar mjukt vid hover, och går snabbare när musen hålls
+    // längst till höger på skärmen.
+    (function () {
+      const marquee = document.querySelector('.marquee');
+      const track   = marquee && marquee.querySelector('.marquee__track');
+      if (!track || !track.getAnimations) return;
+      const anim = track.getAnimations()[0];
+      if (!anim) return;                      // t.ex. vid "reducerad rörelse"
+
+      const FAST = 2.5;    // hur snabbt den går vid högerkanten (1 = vanlig fart)
+      const EDGE = 0.15;   // hur stor del av skärmen (från höger) som räknas, 0.15 = 15 %
+      const EASE = 0.12;   // hur mjukt farten ändras (lägre = mjukare)
+
+      marquee.classList.add('js-rate');
+
+      let over = false, inEdge = false, focused = false;
+      let target = 1, rate = 1, raf = null;
+
+      function setTarget() {
+        target = inEdge ? FAST : (over || focused ? 0 : 1);
+        if (!raf) raf = requestAnimationFrame(step);
+      }
+
+      function step() {
+        rate += (target - rate) * EASE;
+        if (Math.abs(target - rate) < 0.01) rate = target;
+        anim.updatePlaybackRate(rate);
+        raf = rate === target ? null : requestAnimationFrame(step);
+      }
+
+      marquee.addEventListener('pointermove', e => {
+        if (e.pointerType !== 'mouse') return;
+        over = true;
+        inEdge = e.clientX > window.innerWidth * (1 - EDGE);
+        setTarget();
+      });
+
+      marquee.addEventListener('pointerleave', () => {
+        over = false;
+        inEdge = false;
+        setTarget();
+      });
+
+      marquee.addEventListener('focusin',  () => { focused = true;  setTarget(); });
+      marquee.addEventListener('focusout', () => { focused = false; setTarget(); });
+    })();
   </script>
 
   <script src="cursor.js"></script>
