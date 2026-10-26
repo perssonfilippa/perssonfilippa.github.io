@@ -1,4 +1,3 @@
-/* Alla vikter av Plus Jakarta Sans laddas här, en gång för alla sidor */
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200..800&display=swap");
 
 :root {
@@ -20,7 +19,6 @@ html {
   overflow-y: scroll;
 }
 
-/* Skalar hela sajten proportionellt på skärmar bredare än ca 1500px */
 html {
   font-size: clamp(16px, calc(100vw / 94.5), 44px);
 }
@@ -43,19 +41,14 @@ a:focus-visible {
   outline-offset: 4px;
 }
 
-/* ---------- Navigation ---------- */
 :root { --nav-color: #ECEDE9; }
-/* Tabbarens fontvikter: ändra bara här */
+
 :root {
-  --nav-weight: 400;          /* sidorna man inte är på */
-  --nav-weight-active: 800;   /* sidan man är på */
+  --nav-weight: 400;
+  --nav-weight-active: 800;
 }
-/* =====================================================================
-   NAVBAR – identisk på Home, Work och About (kopiera hela blocket
-   oförändrat till alla sidor). Bara färgen styrs per sida via
-   --nav-color.
-   ===================================================================== */
-html { overflow-y: scroll; }   /* alltid scrollist, så bredden är lika på alla sidor */
+
+html { overflow-y: scroll; }
 
 .nav {
   position: absolute !important;
@@ -97,14 +90,12 @@ html { overflow-y: scroll; }   /* alltid scrollist, så bredden är lika på all
 
 .nav a:hover { opacity: 0.6; }
 
-/* Sidan man är på: fetare istället för understruken */
 .nav a[aria-current="page"],
 .nav a.active {
   font-weight: var(--nav-weight-active) !important;
   text-decoration: none !important;
 }
 
-/* Extra stark regel: vinner även om en sida har kvar gammal navbar-CSS inline */
 html body .nav a[aria-current="page"],
 html body .nav a.active {
   font-weight: var(--nav-weight-active) !important;

@@ -1,22 +1,11 @@
-/* =========================
-   SVARTVITT-LÄGE
-   Knappen (.bw-toggle) ligger nere i vänstra hörnet och slår av/på klassen
-   "bw" på <html>. Då byts det gröna mot svart och det beiga mot vitt.
-   Bilder och video påverkas inte.
-   Det här blocket kan klistras in i style.css i stället för att länkas separat.
-========================= */
-
-/* Färgerna som byts. Lägg till fler variabler här om andra sidor använder egna. */
 :root.bw {
-    --bg: #000000;          /* grönt -> svart */
-    --nav-color: #ffffff;   /* beige -> vitt (navbar, kort) */
-    --heading: #ffffff;     /* rubriker */
-    --about-text: #ffffff;  /* brödtext */
-    --frame: #ffffff;       /* ram runt bilden */
+    --bg: #000000;
+    --nav-color: #ffffff;
+    --heading: #ffffff;
+    --about-text: #ffffff;
+    --frame: #ffffff;
   }
   
-  /* Element som theme.js märkt som gröna/beiga (hårdkodade färger).
-     g = grön -> svart, b = beige -> vit. c = text, b = bakgrund, o = ram. */
   :root.bw [data-bw~="c-g"] { color: #000 !important; }
   :root.bw [data-bw~="c-b"] { color: #fff !important; }
   :root.bw [data-bw~="b-g"] { background-color: #000 !important; }
@@ -24,18 +13,11 @@
   :root.bw [data-bw~="o-g"] { border-color: #000 !important; }
   :root.bw [data-bw~="o-b"] { border-color: #fff !important; }
   
-  /* =========================
-     WORK-SIDAN
-     Där är bakgrunden beige och texten grön/mörk (tvärtom mot About), så den
-     behöver egna färger: vit bakgrund och svart text, annars blir navbaren
-     vit på vitt och beskrivningarna osynliga.
-  ========================= */
-  
   :root.bw body:has(main.work) {
-    --nav-color: #000;     /* navbaren */
-    --work-text: #000;     /* bildtexter och projektbeskrivningar */
-    --green: #000;         /* Explore/Close och back-to-top */
-    --line-color: #000;    /* tidslinjen */
+    --nav-color: #000;
+    --work-text: #000;
+    --green: #000;
+    --line-color: #000;
     background: #fff;
     color: #000;
   }
@@ -50,7 +32,6 @@
     color: #000 !important;
   }
   
-  /* Panelen med projektbeskrivning: vit yta, svart text */
   :root.bw .panel {
     background: #fff !important;
     color: #000 !important;
@@ -66,22 +47,14 @@
     opacity: 0.6;
   }
   
-  /* Back-to-top: svart cirkel med vit pil */
   :root.bw .scroll-to-top {
     background-color: #000 !important;
     color: #fff !important;
   }
   
-  /* Används kort medan färgerna mäts, så inget hinner animeras */
   .bw-calc *, .bw-calc *::before, .bw-calc *::after { transition: none !important; }
   
-  /* Bilder och video behåller sina färger: det är bara det gröna och beiga som byts. */
-  
   body { transition: background-color .35s ease; }
-  
-  /* =========================
-     KNAPPEN
-  ========================= */
   
   .bw-toggle {
     position: fixed;
@@ -109,31 +82,16 @@
     height: 50%;
   }
   
-  /* =========================
-     HÖRNIKONERNA
-     Svartvitt-knappen (vänster) och back-to-top (höger) delar samma storlek
-     och samma avstånd till kanten och botten, så de ligger exakt i linje.
-     Ändra bara här.
-  ========================= */
-  
   :root {
-    --corner-gap: 2rem;     /* avstånd till sidan och till botten */
-    --corner-size: 48px;    /* storlek på båda */
+    --corner-gap: 2rem;
+    --corner-size: 2.5rem;
   }
   
   @media (max-width: 900px) {
     :root {
       --corner-gap: 1.5rem;
-      --corner-size: 42px;
+      --corner-size: 2.25rem;
     }
-  }
-  
-  /* "html" framför gör att den vinner över sidans egna värden */
-  html .scroll-to-top {
-    right: var(--corner-gap);
-    bottom: var(--corner-gap);
-    width: var(--corner-size);
-    height: var(--corner-size);
   }
   
   .bw-toggle:hover,

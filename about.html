@@ -8,8 +8,6 @@
 
   <title>About – Filippa Persson</title>
 
-
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -23,27 +21,20 @@
   <script src="theme.js"></script>
 
   <style>
-  :root { --nav-color: #ECEDE9; }
-
-  /* Navbaren (layout, vikt, aktiv länk) styrs av style.css och är lika på alla sidor. */
+    :root { --nav-color: #ECEDE9; }
 
     :root {
-      --bg: #949139;                      /* bakgrund (grön) */
-      --heading: #ECEDE9;                 /* About me + Want to know more? */
-      --about-text: #ffffff;              /* brödtext */
-      --frame: #ffffff;                   /* ram runt bilden */
-      --heading-font: var(--sans-heavy);  /* Plus Jakarta Sans, definieras i style.css */
-      --heading-weight: 600;              /* vikt på rubrikerna (var 600) */
+      --bg: #949139;
+      --heading: #ECEDE9;
+      --about-text: #ffffff;
+      --frame: #ffffff;
+      --heading-font: var(--sans-heavy);
+      --heading-weight: 600;
     }
 
     body {
       background: var(--bg);
     }
-
-    /* =========================
-       LAYOUT
-       Vänster: bild + Contact. Höger: About me-texten.
-    ========================= */
 
     .about {
       display: grid;
@@ -62,12 +53,8 @@
       font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
     }
 
-    /* Övre delen: minst lika hög som fönstret minus lite, så att korten bara
-       tittar upp längst ner när man står högst upp på sidan.
-       Länken ("Explore more") får hela utrymmet under texten och centreras i det,
-       alltså mitt emellan texten och korten. */
     .page-top {
-      --cards-peek: 1.1rem;        /* så mycket av korten som syns (högre = mer synligt) */
+      --cards-peek: 1.1rem;
       display: flex;
       flex-direction: column;
       box-sizing: border-box;
@@ -75,7 +62,6 @@
       min-height: calc(100svh - var(--cards-peek));
     }
 
-    /* Samma kolumner som .about, så länken hamnar i textkolumnen */
     .more-row {
       flex: 1;
       display: grid;
@@ -84,35 +70,25 @@
       align-items: center;
       width: min(75vw, 68.75rem);
       margin: 0 auto;
-      padding: 1.5rem 0;           /* minsta luft ovanför/under om skärmen är låg */
+      padding: 1.5rem 0;
     }
 
     .more-row .about__more {
       grid-column: 2;
       margin-top: 0;
       border-top: 0;
-      padding: 0 0 1.5rem;         /* extra luft under länken = den flyttas uppåt (ändra 1.5rem) */
+      padding: 0 0 1.5rem;
     }
 
-    /* =========================
-       BILD
-    ========================= */
-
-    /* Ramen sitter på wrappern och följer därmed själva fotot:
-       scriptet längst ner beskär bort ev. genomskinlig kant i PNG-filen. */
     .about__photo-wrap {
       grid-area: photo;
       position: relative;
       width: 100%;
       aspect-ratio: 256 / 332;
-      border: 4px solid var(--frame);   /* vit ram, stroke 4 */
-      background: rgba(255, 255, 255, 0.14);   /* platshållare medan bilden hämtas */
+      border: 4px solid var(--frame);
+      background: rgba(255, 255, 255, 0.14);
       overflow: hidden;
 
-      /* ---- Justera beskärningen av fotot i ramen ----
-         --photo-x : 0 = visa vänsterkanten, 50 = mitten, 100 = högerkanten
-         --photo-y : 0 = visa överkanten,   50 = mitten, 100 = nederkanten
-         --photo-zoom : 1 = fyller ramen precis, 1.2 = 20 % inzoomad osv. */
       --photo-x: 50;
       --photo-y: 50;
       --photo-zoom: 1;
@@ -126,31 +102,13 @@
       max-width: none;
       width: 100%;
       height: 100%;
-      object-fit: cover;                /* fyller ramen direkt, utan att vänta på script */
+      object-fit: cover;
       object-position: calc(var(--photo-x) * 1%) calc(var(--photo-y) * 1%);
     }
 
-    /* =========================
-       CONTACT ("Want to know more?")
-       Rubriken = samma stil som "About me".
-       Länkarna = samma stil som brödtexten.
-    ========================= */
-
     .about__contact {
       grid-area: contact;
-      margin-top: 0.65rem;              /* var 0.8rem, en aning närmare bilden */
-    }
-
-    .about__contact-title {
-      text-transform: uppercase;
-      letter-spacing: 0.05em;   /* luft mellan bokstäverna i versaler */
-      word-spacing: 0.08em;     /* luft mellan orden så att de inte smälter ihop */
-      margin: 0 0 0.5rem;
-      color: var(--heading);
-      font-family: var(--heading-font);
-      font-weight: var(--heading-weight);
-      font-size: clamp(1.05rem, 1.4vw, 1.3rem);
-      line-height: 1.3;
+      margin-top: 0.65rem;
     }
 
     .about__contact a {
@@ -167,7 +125,7 @@
     }
 
     .about__contact a + a {
-      margin-top: 0.4rem;               /* lite mer luft mellan e-postadressen och LinkedIn */
+      margin-top: 0.4rem;
     }
 
     .about__contact a:hover,
@@ -180,18 +138,14 @@
       outline-offset: 3px;
     }
 
-    /* =========================
-       TEXT
-    ========================= */
-
     .about__text {
       grid-area: text;
     }
 
     .about__heading {
       text-transform: uppercase;
-      letter-spacing: 0.05em;   /* luft mellan bokstäverna i versaler */
-      word-spacing: 0.08em;     /* luft mellan orden så att de inte smälter ihop */
+      letter-spacing: 0.05em;
+      word-spacing: 0.08em;
       margin: 0 0 0.5rem;
       color: var(--heading);
       font-family: var(--heading-font);
@@ -210,12 +164,8 @@
     }
 
     .about__text p:last-child {
-      margin-bottom: 0;            /* ingen extra luft under sista stycket, annars hamnar länken för långt ner */
+      margin-bottom: 0;
     }
-
-    /* =========================
-       "WHO IS FILIPPA OUTSIDE ...": rubrik med knapp, texten fälls ner
-    ========================= */
 
     .about__more {
       margin-top: 2.6rem;
@@ -227,11 +177,11 @@
 
     .about__more-toggle {
       text-transform: uppercase;
-      letter-spacing: 0.05em;   /* luft mellan bokstäverna i versaler */
-      word-spacing: 0.08em;     /* luft mellan orden så att de inte smälter ihop */
+      letter-spacing: 0.05em;
+      word-spacing: 0.08em;
       display: flex;
       justify-content: space-between;
-      align-items: baseline;   /* pilen ligger på första radens baslinje, även när texten radbryter */
+      align-items: baseline;
       gap: 1.2rem;
       width: 100%;
       margin: 0;
@@ -252,9 +202,6 @@
       outline-offset: 4px;
     }
 
-    /* Pil (>) åt höger, utan ring. Nederkanten ligger på första radens baslinje och
-       höjden är lika med versalhöjden (1cap), så pilen står på samma höjd som första raden.
-       Äldre webbläsare får ungefär samma höjd via 0.7em. */
     .about__more-icon {
       flex: none;
       display: block;
@@ -272,7 +219,7 @@
       width: auto;
       fill: none;
       stroke: currentColor;
-      stroke-width: 1.2;          /* tunn linje, lättare än rubrikens vikt */
+      stroke-width: 1.2;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
@@ -281,7 +228,6 @@
       transform: translateX(0.3em);
     }
 
-    /* "Explore more" + pilen, ihop till höger */
     .about__more-go {
       flex: none;
       display: inline-flex;
@@ -296,19 +242,13 @@
       letter-spacing: 0.05em;
     }
 
-    /* =========================
-       CITAT: löpande rad längst ner, stannar vid hover
-       Två identiska grupper ligger efter varandra och hela spåret
-       flyttas exakt en grupp åt vänster, så loopen blir sömlös.
-    ========================= */
-
     .marquee {
-      --marquee-gap: 1.25rem;       /* avstånd mellan korten (lika överallt) */
-      --marquee-speed: 90s;         /* tid för ett varv, högre = långsammare */
-      --card-radius: 0.5rem;        /* rundning i vanligt läge */
-      --card-radius-hover: 1.5rem;  /* rundning på kortet man hovrar över */
-      --card-bg: var(--nav-color);  /* samma färg som navbaren */
-      --card-text: var(--bg);       /* samma gröna som sidans bakgrund */
+      --marquee-gap: 1.25rem;
+      --marquee-speed: 90s;
+      --card-radius: 0.5rem;
+      --card-radius-hover: 1.5rem;
+      --card-bg: var(--nav-color);
+      --card-text: var(--bg);
       --card-w: clamp(13rem, 16vw, 15.5rem);
       --card-h: clamp(9.5rem, 11.5vw, 11.25rem);
 
@@ -324,8 +264,6 @@
       animation: marquee-scroll var(--marquee-speed) linear infinite;
     }
 
-    /* Hovra (eller fokusera med tangentbord) = pausa */
-    /* (Reservlösning utan script. Med script styr .js-rate farten mjukt, se längst ner.) */
     .marquee:not(.js-rate):hover .marquee__track,
     .marquee:not(.js-rate):focus-within .marquee__track {
       animation-play-state: paused;
@@ -335,7 +273,7 @@
       display: flex;
       flex: none;
       gap: var(--marquee-gap);
-      padding-right: var(--marquee-gap);   /* samma som gap så att skarven blir jämn */
+      padding-right: var(--marquee-gap);
       margin: 0;
       list-style: none;
     }
@@ -361,7 +299,6 @@
       text-wrap: balance;
     }
 
-    /* Kortet under musen rundas lite mer (fortfarande en rektangel) */
     .marquee__item:hover {
       border-radius: var(--card-radius-hover);
     }
@@ -371,7 +308,6 @@
       to   { transform: translateX(-50%); }
     }
 
-    /* Mindre rörelse: ingen animation, raden går att scrolla i sidled i stället */
     @media (prefers-reduced-motion: reduce) {
       .marquee {
         overflow-x: auto;
@@ -389,10 +325,6 @@
       white-space: nowrap;
     }
 
-    /* =========================
-       HALVSKÄRM / SURFPLATTA
-    ========================= */
-
     @media (max-width: 900px) {
       .about {
         width: 84vw;
@@ -406,37 +338,28 @@
       .more-row .about__more { grid-column: 1; }
     }
 
-    /* =========================
-       HALVSKÄRM: bilden till höger, texten radbryter runt den
-       och börjar på samma höjd som bildens överkant
-    ========================= */
-
     @media (min-width: 520px) and (max-width: 900px) {
       .about {
-        display: block;            /* släpper griden så texten kan flyta runt bilden */
+        display: block;
         width: 84vw;
         padding: 16vh 0 8vh;
       }
 
       .about__photo-wrap {
         float: right;
-        width: 40%;                /* bildens bredd, justera här */
-        margin: 0 0 1.5rem 2rem;   /* luft mot texten (vänster) och under bilden */
+        width: 40%;
+        margin: 0 0 1.5rem 2rem;
       }
 
       .about__text p {
-        max-width: none;           /* låt texten fylla hela bredden bredvid bilden */
+        max-width: none;
       }
 
       .about__contact {
-        clear: both;               /* Contact hamnar alltid under både text och bild */
+        clear: both;
         margin-top: 2rem;
       }
     }
-
-    /* =========================
-       MOBIL: bild, text, sist Contact
-    ========================= */
 
     @media (max-width: 519px) {
       .about {
@@ -473,10 +396,6 @@
 
 <body>
 
-  <!-- =========================
-       NAVIGATION
-  ========================= -->
-
   <nav class="nav" aria-label="Huvudmeny">
     <a href="index.html">Home</a>
 
@@ -486,12 +405,6 @@
     </div>
   </nav>
 
-
-  <!-- =========================
-       ABOUT
-  ========================= -->
-
-  <!-- Hela övre delen av sidan: text överst, länken mitt emellan texten och korten -->
   <div class="page-top">
 
   <main class="about">
@@ -564,13 +477,6 @@
 
   </div>
 
-
-  <!-- =========================
-       CITAT: "Thoughts from friends and family"
-       Löpande rad över hela bredden. Hovra = stannar.
-       Andra gruppen är en kopia (aria-hidden) för att loopen ska vara sömlös.
-  ========================= -->
-
   <section class="marquee" aria-labelledby="quotesTitle">
     <h2 class="sr-only" id="quotesTitle">Thoughts from friends and family</h2>
 
@@ -599,16 +505,11 @@
     </div>
   </section>
 
-
   <script>
-    // Fyller ramen med själva fotot (utan genomskinlig kant i PNG-filen),
-    // beskuret till ramens proportioner (256:332), centrerat.
     const wrapEl  = document.querySelector('.about__photo-wrap');
     const photoEl = document.querySelector('.about__photo');
-    let frame = null;   // fotots område i bilden (i originalpixlar)
+    let frame = null;
 
-    // Söker av en nedskalad kopia (max 300 px) i stället för hela bilden,
-    // så att beräkningen går på millisekunder även med en stor PNG.
     function findFrame() {
       const nw = photoEl.naturalWidth, nh = photoEl.naturalHeight;
       if (!nw || !nh) return;
@@ -638,7 +539,7 @@
           };
         }
       } catch (e) {
-        frame = null;   // t.ex. om sidan öppnas direkt som fil: visa hela bilden
+        frame = null;
       }
     }
 
@@ -650,8 +551,6 @@
       const py   = (parseFloat(cs.getPropertyValue('--photo-y')) || 50) / 100;
       const zoom = Math.max(1, parseFloat(cs.getPropertyValue('--photo-zoom')) || 1);
 
-      // Har bilden ingen tom kant och ingen zoom räcker CSS (object-fit: cover):
-      // då hoppar ingenting till när scriptet körts.
       const m = 0.012;
       const hasMargin = frame && (frame.x > nw * m || frame.y > nh * m ||
                                   nw - (frame.x + frame.w) > nw * m ||
@@ -663,8 +562,8 @@
       }
 
       const f  = frame || { x: 0, y: 0, w: nw, h: nh };
-      const bw = wrapEl.clientWidth, bh = wrapEl.clientHeight;   // innanför ramen
-      const k = Math.max(bw / f.w, bh / f.h) * zoom;               // "cover" + zoom
+      const bw = wrapEl.clientWidth, bh = wrapEl.clientHeight;
+      const k = Math.max(bw / f.w, bh / f.h) * zoom;
       photoEl.style.objectFit = 'fill';
       photoEl.style.width  = (nw * k) + 'px';
       photoEl.style.height = (nh * k) + 'px';
@@ -675,10 +574,9 @@
     function onPhoto() {
       findFrame();
       layoutPhoto();
-      photoEl.classList.add('is-ready');   // visa först när bilden är på plats
+      photoEl.classList.add('is-ready');
     }
 
-    // Så fort bilden är avkodad och klar
     if (photoEl.complete && photoEl.naturalWidth) {
       onPhoto();
     } else {
@@ -689,18 +587,16 @@
   </script>
 
   <script>
-    // Citatraden: stannar mjukt vid hover, och går snabbare när musen hålls
-    // längst till höger på skärmen.
     (function () {
       const marquee = document.querySelector('.marquee');
       const track   = marquee && marquee.querySelector('.marquee__track');
       if (!track || !track.getAnimations) return;
       const anim = track.getAnimations()[0];
-      if (!anim) return;                      // t.ex. vid "reducerad rörelse"
+      if (!anim) return;
 
-      const FAST = 2.5;    // hur snabbt den går vid högerkanten (1 = vanlig fart)
-      const EDGE = 0.15;   // hur stor del av skärmen (från höger) som räknas, 0.15 = 15 %
-      const EASE = 0.12;   // hur mjukt farten ändras (lägre = mjukare)
+      const FAST = 2.5;
+      const EDGE = 0.15;
+      const EASE = 0.12;
 
       marquee.classList.add('js-rate');
 

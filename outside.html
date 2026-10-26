@@ -11,7 +11,6 @@
 
   <title>Outside – Filippa Persson</title>
 
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -38,21 +37,18 @@
       background: var(--bg);
     }
 
-    /* LAYOUT */
-
     .outside {
       width: min(75vw, 68.75rem);
       margin: 0 auto;
-      padding: calc(20vh - 2.5rem) 0 12vh;   /* mindre avstånd upp till menyn */
+      padding: calc(20vh - 2.5rem) 0 12vh;
       font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
     }
 
-    /* < Back: länk tillbaka till About, ovanför rubriken */
     .outside__back {
       display: inline-flex;
-      align-items: baseline;      /* pilen står på textens baslinje */
+      align-items: baseline;
       gap: 0.55rem;
-      margin: -1rem 0 1.6rem;     /* Back sitter 1rem högre än standard, 1.6rem luft ner till rubriken */
+      margin: -1rem 0 1.6rem;
       color: var(--heading);
       font-weight: 400;
       font-size: clamp(0.95rem, 1.2vw, 1.15rem);
@@ -74,7 +70,7 @@
     .outside__back-icon {
       flex: none;
       display: block;
-      height: 0.7em;              /* ungefär versalhöjden i äldre webbläsare */
+      height: 0.7em;
       transition: transform .25s ease;
     }
 
@@ -109,7 +105,6 @@
       word-spacing: 0.08em;
     }
 
-    /* texten är lika bred som bildblocket */
     .outside__text {
       max-width: none;
       width: 100%;
@@ -123,16 +118,11 @@
       line-height: 1.4;
     }
 
-    /* BILDER – symmetriskt block
-       Varje rad fyller hela bredden och alla bilder i en rad
-       har exakt samma höjd. Raderna har nästan samma höjd,
-       så kanterna blir raka överst, nederst och på sidorna. */
-
     .gallery {
       display: flex;
       flex-direction: column;
       gap: var(--gap);
-      margin-top: clamp(1.5rem, 3.6vw, 2.5rem);   /* avstånd mellan texten och bilderna */
+      margin-top: clamp(1.5rem, 3.6vw, 2.5rem);
     }
 
     .row {
@@ -147,9 +137,6 @@
       background: var(--tile-bg);
     }
 
-    /* stående = 2:3, liggande = 3:2 */
-    /* Bredden fördelas efter bildernas format (2/3 : 3/2 = 4 : 9),
-       så att alla bilder i en rad blir lika höga och behåller sitt format. */
     .tile--p {
       flex: 4 1 0;
       aspect-ratio: 2 / 3;
@@ -167,8 +154,6 @@
       object-fit: cover;
     }
 
-    /* RESPONSIV DESIGN */
-
     @media (max-width: 900px) {
       .outside {
         width: 84vw;
@@ -176,7 +161,6 @@
       }
     }
 
-    /* Mobil: bilderna behåller sitt format och ligger i två kolumner */
     @media (max-width: 600px) {
       .outside {
         width: 88vw;
@@ -233,53 +217,43 @@
 
     <div class="outside__text">
       <p>
-        I would describe myself as a social, happy and positive person 
-        who loves trying new things. This can mean anything from 
-        trying a new sport or taking on a challenge, to exploring new 
-        places or testing a new recipe. Whatever I do, I always want to learn, 
+        I would describe myself as a social, happy and positive person
+        who loves trying new things. This can mean anything from
+        trying a new sport or taking on a challenge, to exploring new
+        places or testing a new recipe. Whatever I do, I always want to learn,
         develop and become better at what I do.
       </p>
 
       <p>
-        I have been active since childhood and have tried many different 
+        I have been active since childhood and have tried many different
         sports, but figure skating and cheerleading have always been
          closest to my heart. Both combine show, eye-catching competition
-          outfits and routines with many different elements. You train 
-          hard for a long time just to be in the spotlight for 2–3 minutes. 
+          outfits and routines with many different elements. You train
+          hard for a long time just to be in the spotlight for 2–3 minutes.
           Cheerleading, in particular, taught me the importance of teamwork,
-           trust and understanding that everyone matters, no matter their 
+           trust and understanding that everyone matters, no matter their
            role.
       </p>
 
       <p>
-        Skiing has been part of my life since I was 18 months old and I absolutely love it. What started as a 
-        hobby has also become a job, as I had the opportunity to work with skiing the winter of 2025. To me, 
-        there is something special about working with something you truly enjoy and care about! I also work as a 
-        Brand Ambassador for New Balance, where I represent the brand in stores, at community events and through 
-        running activities. So yes, I run too! At my part-time job at Thule, I enjoy creating great customer 
+        Skiing has been part of my life since I was 18 months old and I absolutely love it. What started as a
+        hobby has also become a job, as I had the opportunity to work with skiing the winter of 2025. To me,
+        there is something special about working with something you truly enjoy and care about! I also work as a
+        Brand Ambassador for New Balance, where I represent the brand in stores, at community events and through
+        running activities. So yes, I run too! At my part-time job at Thule, I enjoy creating great customer
         experiences and working with quality and the people the brand is made for.
       </p>
 
       <p>
-        Besides sports and staying active, I love capturing moments, whether with my phone or a proper camera. In 
-        2025 and 2026, I was part of the TCS Lidingöloppet social media team, capturing, editing and publishing 
-        content in real time. My friends could tell you how often I take photos and videos! Last but not least, I am also interested in 
+        Besides sports and staying active, I love capturing moments, whether with my phone or a proper camera. In
+        2025 and 2026, I was part of the TCS Lidingöloppet social media team, capturing, editing and publishing
+        content in real time. My friends could tell you how often I take photos and videos! Last but not least, I am also interested in
         fashion and interior design, nothing beats the feeling of putting together a really nice outfit!
       </p>
     </div>
 
-    <!--
-      SYMMETRISKT GALLERI
-      .tile--p = stående bild, .tile--l = liggande bild.
-      Du kan byta plats på bilder INOM en rad fritt.
-      Byter du plats mellan rader: behåll samma antal stående/liggande per rad
-      (rad 1, 2, 5: 4 stående + 2 liggande. Rad 3, 4: 2 stående + 3 liggande.
-      Rad 6: 3 stående + 2 liggande), annars blir raderna olika höga.
-    -->
-
     <section class="gallery" aria-label="Bilder">
 
-      <!-- Rad 1 -->
       <div class="row">
         <figure class="tile tile--p"><img src="bilder/staende/s.png" alt="" loading="lazy" decoding="async"></figure>
         <figure class="tile tile--l"><img src="bilder/liggande/07.png" alt="" loading="lazy" decoding="async"></figure>
@@ -289,7 +263,6 @@
         <figure class="tile tile--p"><img src="bilder/staende/m.png" alt="" loading="lazy" decoding="async"></figure>
       </div>
 
-      <!-- Rad 2 -->
       <div class="row">
         <figure class="tile tile--p"><img src="bilder/staende/b.png" alt="" loading="lazy" decoding="async"></figure>
         <figure class="tile tile--l"><img src="bilder/liggande/02.png" alt="" loading="lazy" decoding="async"></figure>
@@ -299,7 +272,6 @@
         <figure class="tile tile--p"><img src="bilder/staende/f.png" alt="" loading="lazy" decoding="async"></figure>
       </div>
 
-      <!-- Rad 3 -->
       <div class="row">
         <figure class="tile tile--l"><img src="bilder/liggande/06.png" alt="" loading="lazy" decoding="async"></figure>
         <figure class="tile tile--p"><img src="bilder/staende/o.png" alt="" loading="lazy" decoding="async"></figure>
@@ -308,7 +280,6 @@
         <figure class="tile tile--l"><img src="bilder/liggande/11.png" alt="" loading="lazy" decoding="async"></figure>
       </div>
 
-      <!-- Rad 4 -->
       <div class="row">
         <figure class="tile tile--p"><img src="bilder/staende/r.png" alt="" loading="lazy" decoding="async"></figure>
         <figure class="tile tile--l"><img src="bilder/liggande/14.png" alt="" loading="lazy" decoding="async"></figure>
@@ -317,7 +288,6 @@
         <figure class="tile tile--l"><img src="bilder/liggande/05.png" alt="" loading="lazy" decoding="async"></figure>
       </div>
 
-      <!-- Rad 5 -->
       <div class="row">
         <figure class="tile tile--p"><img src="bilder/staende/l.png" alt="" loading="lazy" decoding="async"></figure>
         <figure class="tile tile--l"><img src="bilder/liggande/08.png" alt="" loading="lazy" decoding="async"></figure>
@@ -327,7 +297,6 @@
         <figure class="tile tile--p"><img src="bilder/staende/a.png" alt="" loading="lazy" decoding="async"></figure>
       </div>
 
-      <!-- Rad 6 -->
       <div class="row">
         <figure class="tile tile--p"><img src="bilder/staende/q.png" alt="" loading="lazy" decoding="async"></figure>
         <figure class="tile tile--l"><img src="bilder/liggande/10.png" alt="" loading="lazy" decoding="async"></figure>

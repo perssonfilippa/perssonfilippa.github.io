@@ -14,22 +14,15 @@
 <style>
   :root { --nav-color: #ECEDE9; }
 
-  /* Navbaren (layout, vikt, aktiv länk) styrs av style.css och är lika på alla sidor. */
-
-
-  /* =====================================================================
-     FÄRGER OCH TYPSNITT
-     ===================================================================== */
   :root {
     --bg: #949139;
     --text: #ECEDE9;
     --heading-font: "Plus Jakarta Sans", sans-serif;
     --body-font: "Roboto", sans-serif;
-    --content-left: 7.9vw;   /* vänster/höger marginal för innehållet */
+    --content-left: 7.9vw;
     --hero-pad: max(var(--content-left), calc((100vw - 140vh) / 2));
   }
 
-  /* ---------- Global typografi ---------- */
   html, body {
     margin: 0;
     background: var(--bg);
@@ -38,7 +31,6 @@
     font-weight: 400;
   }
 
-  /* ---------- Hero ---------- */
   .hero {
     position: relative;
     min-height: 100vh;
@@ -51,13 +43,13 @@
   }
 
   .hero__photo-wrap {
-    width: 25vw;            /* startvärde, justeras av scriptet */
+    width: 25vw;
     overflow: hidden;
   }
 
   .hero__photo {
     display: block;
-    width: 100%;            /* justeras av scriptet */
+    width: 100%;
     max-width: none;
     height: auto;
   }
@@ -66,7 +58,7 @@
     margin: 1.4vh 0 0;
     font-family: var(--heading-font);
     font-weight: 600;
-    font-size: 10vw;            /* startvärde, justeras av scriptet */
+    font-size: 10vw;
     line-height: 0.85;
     text-transform: uppercase;
     white-space: nowrap;
@@ -89,7 +81,6 @@
   .hero__meta p { margin: 0; }
   .hero__meta p:last-child { text-align: right; }
 
-  /* ---------- Kontakt ---------- */
   .hero__contact {
     position: absolute;
     right: var(--hero-pad);
@@ -112,11 +103,8 @@
 
   .hero__contact a:hover { opacity: 0.6; }
 
-  /* Rubrikerna "Phone" och "Mail" visas bara på mobil */
   .contact__label { display: none; }
 
-
-  /* ---------- Telefonnummer: klick kopierar numret ---------- */
   .phone { position: relative; display: inline-block; }
 
   .phone__btn {
@@ -133,20 +121,16 @@
 
   .phone__btn:focus { outline: none; }
 
-  /* Ingen ruta runt numret. Tangentbordsanvändare ser fokus som understrykning. */
   .phone__btn:focus-visible {
     outline: none;
     text-decoration: underline;
     text-underline-offset: 0.25em;
   }
 
-  /* "Copied!" som visas en kort stund efter kopiering:
-     en rund, ifylld vit cirkel. Texten är grön (samma som bakgrunden) och
-     blir svart i svartvitt-läget, eftersom --bg då är svart. */
   .phone__toast {
     position: absolute;
-    right: calc(100% + 1.2em);   /* vid sidan av numret, åt vänster */
-    bottom: calc(100% + 0.3em);  /* ovanför numrets rad, så den aldrig täcker mejladressen */
+    right: calc(100% + 1.2em);
+    bottom: calc(100% + 0.3em);
     z-index: 5;
     display: grid;
     place-items: center;
@@ -174,28 +158,23 @@
     transform: translate(0, 0);
   }
 
-  /* ---------- Mobil ----------
-     Bild + namn + beskrivning nära mitten av första skärmen,
-     kontakten ligger under skärmkanten och syns när man scrollar. */
   @media (max-width: 600px) {
     .hero {
       justify-content: flex-start;
       min-height: 0;
-      padding-top: 36vh;       /* var 32vh, högre tal = innehållet längre ner */
+      padding-top: 36vh;
       padding-bottom: 12vh;
       margin-bottom: 0;
     }
 
-    /* Bara beskrivningen visas; "Stockholm, Sweden..." döljs */
     .hero__meta { flex-direction: column; gap: 0; }
     .hero__meta p:first-child { font-size: clamp(0.62rem, 2.6vw, 1rem); }
     .hero__meta p:last-child { display: none; }
 
-    /* Kontaktblocket: långt ner (utanför första skärmen), högerjusterat */
     .hero__contact {
       position: static;
       align-self: flex-end;
-      margin-top: 45vh;        /* högre tal = längre ner, mer scroll */
+      margin-top: 45vh;
       padding-top: 0;
       text-align: right;
       font-size: clamp(0.8rem, 3.3vw, 1.15rem);
@@ -256,7 +235,6 @@
     </address>
   </header>
 
-
   <script>
     const nameEl  = document.getElementById('heroName');
     const photoEl = document.querySelector('.hero__photo');
@@ -266,8 +244,6 @@
 
     let frame = null;
 
-    // Söker av en nedskalad kopia (max 300 px) i stället för hela bilden,
-    // så att det går på millisekunder även med en stor PNG.
     function findFrame() {
       const nw = photoEl.naturalWidth, nh = photoEl.naturalHeight;
       if (!nw || !nh) return;
@@ -323,8 +299,6 @@
       const size = 200;
       ctx.font = `600 ${size}px "Plus Jakarta Sans", sans-serif`;
 
-      // Extra mellanrum mellan förnamn och efternamn, i em (0 = vanligt ordmellanrum).
-      // Räknas in här så att hela namnet fortfarande fyller bredden exakt.
       const WORD_GAP = 0.1;
 
       const full  = inkOf(nameEl.textContent.trim().toUpperCase());
@@ -347,7 +321,6 @@
   </script>
 
   <script>
-    // Klick på telefonnumret kopierar det och visar en kort bekräftelse ("Copied!")
     (function () {
       const btn   = document.getElementById('phoneBtn');
       const toast = document.getElementById('phoneToast');
@@ -377,7 +350,7 @@
       }
 
       btn.addEventListener('click', async (e) => {
-        if (e.detail) btn.blur();   // klick med mus: ingen kvarlämnad fokusruta
+        if (e.detail) btn.blur();
         let ok = false;
         try {
           await navigator.clipboard.writeText(number);
