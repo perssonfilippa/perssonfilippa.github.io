@@ -323,9 +323,15 @@
       const size = 200;
       ctx.font = `600 ${size}px "Plus Jakarta Sans", sans-serif`;
 
+      // Extra mellanrum mellan förnamn och efternamn, i em (0 = vanligt ordmellanrum).
+      // Räknas in här så att hela namnet fortfarande fyller bredden exakt.
+      const WORD_GAP = 0.1;
+
       const full  = inkOf(nameEl.textContent.trim().toUpperCase());
-      const scale = avail / full.width;
+      const extra = WORD_GAP * size;
+      const scale = avail / (full.width + extra);
       nameEl.style.fontSize = (size * scale) + 'px';
+      nameEl.style.wordSpacing = (extra * scale) + 'px';
       nameEl.style.marginLeft = (full.left * scale) + 'px';
 
       layoutPhoto(inkOf('FILI').width * scale);
