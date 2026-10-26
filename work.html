@@ -2,9 +2,6 @@
 <html lang="sv">
 
 <head>
-  <link rel="stylesheet" href="theme.css">
-<script src="theme.js"></script>
-
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#815823">
@@ -23,6 +20,8 @@
   >
 
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="theme.css">
+  <script src="theme.js"></script>
 
   <style>
     :root { --nav-color: #949139; }
@@ -329,14 +328,16 @@
 
     /* =========================
        BACK TO TOP BUTTON
+       Samma storlek och samma avstånd till kanten/botten som svartvitt-knappen
+       (värdena är lika med --corner-gap och --corner-size i theme.css).
     ========================= */
 
     .scroll-to-top {
       position: fixed;
       bottom: 2rem;
       right: 2rem;
-      width: 48px;
-      height: 48px;
+      width: 2.5rem;
+      height: 2.5rem;
       border-radius: 50%;
       background-color: var(--green);
       color: #ffffff;
@@ -358,8 +359,8 @@
     .scroll-to-top:focus-visible { outline: 2px solid var(--work-text); outline-offset: 4px; }
 
     .scroll-to-top svg {
-      width: 24px;
-      height: 24px;
+      width: 20px;
+      height: 20px;
       fill: none;
       stroke: currentColor;
       stroke-width: 2.5;
@@ -374,7 +375,7 @@
     @media (max-width: 900px) {
       :root { --content-gap: 2.2rem; }
       .work { padding: 16vh 0 8vh; }
-      .scroll-to-top { bottom: 1.5rem; right: 1.5rem; width: 42px; height: 42px; }
+      .scroll-to-top { bottom: 1.5rem; right: 1.5rem; width: 2.25rem; height: 2.25rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
