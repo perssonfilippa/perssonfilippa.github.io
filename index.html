@@ -141,8 +141,8 @@
      blir svart i svartvitt-läget, eftersom --bg då är svart. */
   .phone__toast {
     position: absolute;
-    left: 50%;
-    bottom: calc(100% + 0.6em);
+    right: calc(100% + 1.2em);   /* vid sidan av numret, åt vänster */
+    top: 50%;
     z-index: 5;
     display: grid;
     place-items: center;
@@ -158,14 +158,15 @@
     white-space: nowrap;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
     opacity: 0;
-    transform: translate(-50%, 4px);
+    /* -50% = mitt för numret, sedan en bit upp (ändra 1.4em för mer/mindre upp) */
+    transform: translate(6px, calc(-50% - 1.4em));
     pointer-events: none;
     transition: opacity 0.2s, transform 0.2s;
   }
 
   .phone__toast.is-visible {
     opacity: 1;
-    transform: translate(-50%, 0);
+    transform: translate(0, calc(-50% - 1.4em));
   }
 
   /* ---------- Mobil ----------
