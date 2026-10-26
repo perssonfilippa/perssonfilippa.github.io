@@ -24,6 +24,54 @@
   :root.bw [data-bw~="o-g"] { border-color: #000 !important; }
   :root.bw [data-bw~="o-b"] { border-color: #fff !important; }
   
+  /* =========================
+     WORK-SIDAN
+     Där är bakgrunden beige och texten grön/mörk (tvärtom mot About), så den
+     behöver egna färger: vit bakgrund och svart text, annars blir navbaren
+     vit på vitt och beskrivningarna osynliga.
+  ========================= */
+  
+  :root.bw body:has(main.work) {
+    --nav-color: #000;     /* navbaren */
+    --work-text: #000;     /* bildtexter och projektbeskrivningar */
+    --green: #000;         /* Explore/Close och back-to-top */
+    --line-color: #000;    /* tidslinjen */
+    background: #fff;
+    color: #000;
+  }
+  
+  :root.bw .work .item__caption,
+  :root.bw .work .item__text-inner p,
+  :root.bw .panel__body p,
+  :root.bw .item__year,
+  :root.bw .item__title,
+  :root.bw .panel__year,
+  :root.bw .panel__title {
+    color: #000 !important;
+  }
+  
+  /* Panelen med projektbeskrivning: vit yta, svart text */
+  :root.bw .panel {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  
+  :root.bw .item__toggle,
+  :root.bw .panel__close {
+    color: #000 !important;
+  }
+  
+  :root.bw .item__toggle:hover,
+  :root.bw .panel__close:hover {
+    opacity: 0.6;
+  }
+  
+  /* Back-to-top: svart cirkel med vit pil */
+  :root.bw .scroll-to-top {
+    background-color: #000 !important;
+    color: #fff !important;
+  }
+  
   /* Används kort medan färgerna mäts, så inget hinner animeras */
   .bw-calc *, .bw-calc *::before, .bw-calc *::after { transition: none !important; }
   
