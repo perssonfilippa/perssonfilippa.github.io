@@ -1,16 +1,16 @@
 <!DOCTYPE html>
 <html lang="sv">
 <head>
-  <link rel="stylesheet" href="theme.css">
-<script src="theme.js"></script>
-<meta name="theme-color" content="#949139">
 <meta charset="UTF-8">
+<meta name="theme-color" content="#949139">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Filippa Persson</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Roboto:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="theme.css">
+<script src="theme.js"></script>
 <style>
   :root { --nav-color: #ECEDE9; }
 
@@ -136,27 +136,36 @@
     outline-offset: 4px;
   }
 
-  /* Feedback som visas en kort stund efter kopiering */
+  /* "Copied!" som visas en kort stund efter kopiering:
+     en rund, ifylld vit cirkel. Texten är grön (samma som bakgrunden) och
+     blir svart i svartvitt-läget, eftersom --bg då är svart. */
   .phone__toast {
     position: absolute;
-    right: 0;
+    left: 50%;
     bottom: calc(100% + 0.6em);
     z-index: 5;
-    padding: 0.45em 1em;
-    background: var(--text);
-    color: #000;
-    text-align: left;
+    display: grid;
+    place-items: center;
+    box-sizing: border-box;
+    width: 5.4em;
+    aspect-ratio: 1;
+    padding: 0;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--bg);
+    font-weight: 500;
+    text-align: center;
     white-space: nowrap;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
     opacity: 0;
-    transform: translateY(4px);
+    transform: translate(-50%, 4px);
     pointer-events: none;
     transition: opacity 0.2s, transform 0.2s;
   }
 
   .phone__toast.is-visible {
     opacity: 1;
-    transform: translateY(0);
+    transform: translate(-50%, 0);
   }
 
   /* ---------- Mobil ----------
@@ -195,8 +204,6 @@
       font-weight: 300;
     }
     .contact__label--mail { margin-top: 1.3em; }
-
-    .phone__toast { right: 0; }
   }
 
 </style>
@@ -235,7 +242,7 @@
         <span class="contact__label">Phone</span>
         <span class="phone">
           <button class="phone__btn" id="phoneBtn" type="button" title="Klicka för att kopiera" aria-label="Kopiera telefonnumret 072-241 04 44">072-241 04 44</button>
-          <span class="phone__toast" id="phoneToast" role="status" aria-live="polite">Telefonnumret kopierades</span>
+          <span class="phone__toast" id="phoneToast" role="status" aria-live="polite">Copied!</span>
         </span><br>
         <span class="contact__label contact__label--mail">Mail</span>
         <a href="mailto:filippa.per@gmail.com">filippa.per@gmail.com</a>
@@ -328,7 +335,7 @@
   </script>
 
   <script>
-    // Klick på telefonnumret kopierar det och visar en kort bekräftelse
+    // Klick på telefonnumret kopierar det och visar en kort bekräftelse ("Copied!")
     (function () {
       const btn   = document.getElementById('phoneBtn');
       const toast = document.getElementById('phoneToast');
@@ -365,7 +372,7 @@
         } catch (e) {
           ok = fallbackCopy(number);
         }
-        show(ok ? 'Telefonnumret kopierades' : 'Kunde inte kopiera, markera numret manuellt');
+        show(ok ? 'Copied!' : 'Failed');
       });
     })();
   </script>
