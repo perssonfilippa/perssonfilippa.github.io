@@ -1,0 +1,67 @@
+/* =========================
+   SVARTVITT-LÄGE
+   Knappen (.bw-toggle) ligger nere i vänstra hörnet och slår av/på klassen
+   "bw" på <html>. Då byts det gröna mot svart och det beiga mot vitt.
+   Det här blocket kan klistras in i style.css i stället för att länkas separat.
+========================= */
+
+/* Färgerna som byts. Lägg till fler variabler här om andra sidor använder egna. */
+:root.bw {
+    --bg: #000000;          /* grönt -> svart */
+    --nav-color: #ffffff;   /* beige -> vitt (navbar, kort) */
+    --heading: #ffffff;     /* rubriker */
+    --about-text: #ffffff;  /* brödtext */
+    --frame: #ffffff;       /* ram runt bilden */
+  }
+  
+  /* Bilder blir också svartvita */
+  img { transition: filter .35s ease; }
+  :root.bw img { filter: grayscale(1); }
+  
+  body { transition: background-color .35s ease; }
+  
+  /* =========================
+     KNAPPEN
+  ========================= */
+  
+  .bw-toggle {
+    position: fixed;
+    left: clamp(1rem, 2.2vw, 1.75rem);
+    bottom: clamp(1rem, 2.2vw, 1.75rem);
+    z-index: 50;
+  
+    display: grid;
+    place-items: center;
+    width: 2.5rem;
+    height: 2.5rem;
+    padding: 0;
+  
+    border: 1.5px solid var(--nav-color, #ECEDE9);
+    border-radius: 50%;
+    background: transparent;
+    color: var(--nav-color, #ECEDE9);
+    cursor: pointer;
+    transition: background-color .25s ease, color .25s ease, transform .25s ease;
+  }
+  
+  .bw-toggle svg {
+    display: block;
+    width: 1.2rem;
+    height: 1.2rem;
+  }
+  
+  .bw-toggle:hover,
+  .bw-toggle:focus-visible {
+    background: var(--nav-color, #ECEDE9);
+    color: var(--bg, #949139);
+    transform: scale(1.06);
+  }
+  
+  .bw-toggle:focus-visible {
+    outline: 2px solid var(--nav-color, #ECEDE9);
+    outline-offset: 3px;
+  }
+  
+  @media (prefers-reduced-motion: reduce) {
+    body, img, .bw-toggle { transition: none; }
+  }
