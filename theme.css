@@ -14,9 +14,35 @@
     --frame: #ffffff;       /* ram runt bilden */
   }
   
-  /* Bilder blir också svartvita */
+  /* Element som theme.js märkt som gröna/beiga (hårdkodade färger).
+     g = grön -> svart, b = beige -> vit. c = text, b = bakgrund, o = ram. */
+  :root.bw [data-bw~="c-g"] { color: #000 !important; }
+  :root.bw [data-bw~="c-b"] { color: #fff !important; }
+  :root.bw [data-bw~="b-g"] { background-color: #000 !important; }
+  :root.bw [data-bw~="b-b"] { background-color: #fff !important; }
+  :root.bw [data-bw~="o-g"] { border-color: #000 !important; }
+  :root.bw [data-bw~="o-b"] { border-color: #fff !important; }
+  
+  /* Används kort medan färgerna mäts, så inget hinner animeras */
+  .bw-calc *, .bw-calc *::before, .bw-calc *::after { transition: none !important; }
+  
+  /* Allt som inte är en variabel blir grått, oavsett hur sidan är byggd:
+     bilder, video, bakgrundsbilder, canvas m.m. Ett osynligt lager över hela
+     fönstret gråar det som ligger bakom, utan att påverka klick eller layout. */
+  :root.bw::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 2147483647;
+    pointer-events: none;
+    -webkit-backdrop-filter: grayscale(1);
+            backdrop-filter: grayscale(1);
+  }
+  
+  /* Reserv för webbläsare utan backdrop-filter */
   img { transition: filter .35s ease; }
-  :root.bw img { filter: grayscale(1); }
+  :root.bw img,
+  :root.bw video { filter: grayscale(1); }
   
   body { transition: background-color .35s ease; }
   
