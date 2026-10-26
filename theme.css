@@ -2,6 +2,7 @@
    SVARTVITT-LÄGE
    Knappen (.bw-toggle) ligger nere i vänstra hörnet och slår av/på klassen
    "bw" på <html>. Då byts det gröna mot svart och det beiga mot vitt.
+   Bilder och video påverkas inte.
    Det här blocket kan klistras in i style.css i stället för att länkas separat.
 ========================= */
 
@@ -26,23 +27,7 @@
   /* Används kort medan färgerna mäts, så inget hinner animeras */
   .bw-calc *, .bw-calc *::before, .bw-calc *::after { transition: none !important; }
   
-  /* Allt som inte är en variabel blir grått, oavsett hur sidan är byggd:
-     bilder, video, bakgrundsbilder, canvas m.m. Ett osynligt lager över hela
-     fönstret gråar det som ligger bakom, utan att påverka klick eller layout. */
-  :root.bw::after {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 2147483647;
-    pointer-events: none;
-    -webkit-backdrop-filter: grayscale(1);
-            backdrop-filter: grayscale(1);
-  }
-  
-  /* Reserv för webbläsare utan backdrop-filter */
-  img { transition: filter .35s ease; }
-  :root.bw img,
-  :root.bw video { filter: grayscale(1); }
+  /* Bilder och video behåller sina färger: det är bara det gröna och beiga som byts. */
   
   body { transition: background-color .35s ease; }
   
@@ -89,5 +74,5 @@
   }
   
   @media (prefers-reduced-motion: reduce) {
-    body, img, .bw-toggle { transition: none; }
+    body, .bw-toggle { transition: none; }
   }
