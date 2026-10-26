@@ -131,9 +131,13 @@
 
   .phone__btn:hover { opacity: 0.6; }
 
+  .phone__btn:focus { outline: none; }
+
+  /* Ingen ruta runt numret. Tangentbordsanvändare ser fokus som understrykning. */
   .phone__btn:focus-visible {
-    outline: 2px solid var(--text);
-    outline-offset: 4px;
+    outline: none;
+    text-decoration: underline;
+    text-underline-offset: 0.25em;
   }
 
   /* "Copied!" som visas en kort stund efter kopiering:
@@ -142,31 +146,32 @@
   .phone__toast {
     position: absolute;
     right: calc(100% + 1.2em);   /* vid sidan av numret, åt vänster */
-    top: 50%;
+    bottom: calc(100% + 0.3em);  /* ovanför numrets rad, så den aldrig täcker mejladressen */
     z-index: 5;
     display: grid;
     place-items: center;
     box-sizing: border-box;
-    width: 5.4em;
+    width: 6.6em;
     aspect-ratio: 1;
-    padding: 0;
+    padding: 0.8em;
     border-radius: 50%;
     background: #fff;
     color: var(--bg);
     font-weight: 500;
+    line-height: 1.15;
     text-align: center;
-    white-space: nowrap;
+    text-wrap: balance;
+    white-space: normal;
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.18);
     opacity: 0;
-    /* -50% = mitt för numret, sedan en bit upp (ändra 1.4em för mer/mindre upp) */
-    transform: translate(6px, calc(-50% - 1.4em));
+    transform: translate(6px, 0);
     pointer-events: none;
     transition: opacity 0.2s, transform 0.2s;
   }
 
   .phone__toast.is-visible {
     opacity: 1;
-    transform: translate(0, calc(-50% - 1.4em));
+    transform: translate(0, 0);
   }
 
   /* ---------- Mobil ----------
@@ -243,7 +248,7 @@
         <span class="contact__label">Phone</span>
         <span class="phone">
           <button class="phone__btn" id="phoneBtn" type="button" title="Klicka för att kopiera" aria-label="Kopiera telefonnumret 072-241 04 44">072-241 04 44</button>
-          <span class="phone__toast" id="phoneToast" role="status" aria-live="polite">Copied!</span>
+          <span class="phone__toast" id="phoneToast" role="status" aria-live="polite">Phone number!</span>
         </span><br>
         <span class="contact__label contact__label--mail">Mail</span>
         <a href="mailto:filippa.per@gmail.com">filippa.per@gmail.com</a>
@@ -365,15 +370,16 @@
         timer = setTimeout(() => toast.classList.remove('is-visible'), 2000);
       }
 
-      btn.addEventListener('click', async () => {
+      btn.addEventListener('click', async (e) => {
+        if (e.detail) btn.blur();   // klick med mus: ingen kvarlämnad fokusruta
         let ok = false;
         try {
           await navigator.clipboard.writeText(number);
           ok = true;
-        } catch (e) {
+        } catch (err) {
           ok = fallbackCopy(number);
         }
-        show(ok ? 'Copied!' : 'Failed');
+        show(ok ? 'Phone number!' : 'Failed');
       });
     })();
   </script>
