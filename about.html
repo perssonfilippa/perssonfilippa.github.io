@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lora:ital,wght@1,600&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,500&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300..700;1,300..700&family=Lora:ital,wght@1,600&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Roboto:ital,wght@0,300;0,400;0,500;1,300;1,400;1,500&display=swap"
     rel="stylesheet"
   >
 
@@ -246,17 +246,19 @@
     ========================= */
 
     .marquee {
-      --marquee-gap: 3rem;          /* avstånd mellan citaten */
-      --marquee-speed: 50s;         /* tid för ett varv, högre = långsammare */
+      --marquee-gap: 1.25rem;       /* avstånd mellan korten (lika överallt) */
+      --marquee-speed: 90s;         /* tid för ett varv, högre = långsammare */
+      --card-radius: 0.5rem;        /* rundning i vanligt läge */
+      --card-radius-hover: 1.5rem;  /* rundning på kortet man hovrar över */
+      --card-bg: var(--nav-color);  /* samma färg som navbaren */
+      --card-text: var(--bg);       /* samma gröna som sidans bakgrund */
+      --card-w: clamp(13rem, 16vw, 15.5rem);
+      --card-h: clamp(9.5rem, 11.5vw, 11.25rem);
 
       width: 100%;
       overflow: hidden;
       padding: 0 0 10vh;
       font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
-
-      /* mjuk toning i kanterna */
-      -webkit-mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
-              mask-image: linear-gradient(to right, transparent, #000 4%, #000 96%, transparent);
     }
 
     .marquee__track {
@@ -282,11 +284,28 @@
 
     .marquee__item {
       flex: none;
-      white-space: nowrap;
-      color: var(--about-text);
-      font-weight: 300;
-      font-size: clamp(0.95rem, 1.2vw, 1.15rem);
-      line-height: 1.4;
+      box-sizing: border-box;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--card-w);
+      height: var(--card-h);
+      padding: 1.1rem 1.4rem;
+      border-radius: var(--card-radius);
+      transition: border-radius .3s ease;
+      background: var(--card-bg);
+      color: var(--card-text);
+      font-style: normal;
+      font-weight: 400;
+      font-size: clamp(0.9rem, 1.1vw, 1.05rem);
+      line-height: 1.35;
+      text-align: center;
+      text-wrap: balance;
+    }
+
+    /* Kortet under musen rundas lite mer (fortfarande en rektangel) */
+    .marquee__item:hover {
+      border-radius: var(--card-radius-hover);
     }
 
     @keyframes marquee-scroll {
@@ -298,8 +317,6 @@
     @media (prefers-reduced-motion: reduce) {
       .marquee {
         overflow-x: auto;
-        -webkit-mask-image: none;
-                mask-image: none;
       }
       .marquee__track { animation: none; }
       .marquee__group[aria-hidden="true"] { display: none; }
@@ -377,7 +394,7 @@
         margin-top: 0;
       }
 
-      .marquee { --marquee-gap: 2rem; }
+      .marquee { --marquee-gap: 1rem; }
     }
 
     @media (prefers-reduced-motion: reduce) {
