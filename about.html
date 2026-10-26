@@ -57,16 +57,39 @@
 
       width: min(75vw, 68.75rem);
       margin: 0 auto;
-      padding: 20vh 0 2rem;             /* lite luft under texten; korten ska titta upp nedanför */
+      padding: 20vh 0 0;
 
       font-family: "Roboto", "Helvetica Neue", Arial, sans-serif;
+    }
 
-      /* Så mycket av korten som sticker upp längst ner i fönstret
-         när man står högst upp på sidan (högre = mer synligt). */
-      --cards-peek: 1.1rem;
+    /* Övre delen: minst lika hög som fönstret minus lite, så att korten bara
+       tittar upp längst ner när man står högst upp på sidan.
+       Länken ("Explore more") får hela utrymmet under texten och centreras i det,
+       alltså mitt emellan texten och korten. */
+    .page-top {
+      --cards-peek: 1.1rem;        /* så mycket av korten som syns (högre = mer synligt) */
+      display: flex;
+      flex-direction: column;
       box-sizing: border-box;
       min-height: calc(100vh - var(--cards-peek));
       min-height: calc(100svh - var(--cards-peek));
+    }
+
+    /* Samma kolumner som .about, så länken hamnar i textkolumnen */
+    .more-row {
+      flex: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 0.415fr) minmax(0, 1fr);
+      column-gap: 2.9%;
+      align-items: center;
+      width: min(75vw, 68.75rem);
+      margin: 0 auto;
+      padding: 1.5rem 0;           /* minsta luft ovanför/under om skärmen är låg */
+    }
+
+    .more-row .about__more {
+      grid-column: 2;
+      margin-top: 0;
     }
 
     /* =========================
@@ -248,6 +271,21 @@
       transform: translateX(0.3em);
     }
 
+    /* "Explore more" + pilen, ihop till höger */
+    .about__more-go {
+      flex: none;
+      display: inline-flex;
+      align-items: baseline;
+      gap: 0.7rem;
+      white-space: nowrap;
+    }
+
+    .about__more-label {
+      font-size: 0.8em;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+    }
+
     /* =========================
        CITAT: löpande rad längst ner, stannar vid hover
        Två identiska grupper ligger efter varandra och hela spåret
@@ -349,6 +387,13 @@
       .about {
         width: 84vw;
       }
+
+      .more-row {
+        width: 84vw;
+        grid-template-columns: 1fr;
+      }
+
+      .more-row .about__more { grid-column: 1; }
     }
 
     /* =========================
@@ -404,6 +449,8 @@
         margin-top: 0;
       }
 
+      .more-row { width: 88vw; }
+
       .marquee { --marquee-gap: 1rem; }
     }
 
@@ -433,6 +480,9 @@
   <!-- =========================
        ABOUT
   ========================= -->
+
+  <!-- Hela övre delen av sidan: text överst, länken mitt emellan texten och korten -->
+  <div class="page-top">
 
   <main class="about">
 
@@ -481,16 +531,6 @@
         for fun.
       </p>
 
-      <p>
-        Let’s turn ideas into something real!
-      </p>
-
-      <a class="about__more about__more-toggle" href="outside.html">
-        <span>Filippa outside of her studies</span>
-        <span class="about__more-icon" aria-hidden="true">
-          <svg viewBox="0 0 7.2 14"><polyline points="0.6 0.6 6.6 7 0.6 13.4"></polyline></svg>
-        </span>
-      </a>
     </section>
 
     <aside class="about__contact" aria-label="Kontakt">
@@ -499,6 +539,20 @@
     </aside>
 
   </main>
+
+  <div class="more-row">
+    <a class="about__more about__more-toggle" href="outside.html">
+      <span>Filippa outside of her studies</span>
+      <span class="about__more-go">
+        <span class="about__more-label">Explore more</span>
+        <span class="about__more-icon" aria-hidden="true">
+          <svg viewBox="0 0 7.2 14"><polyline points="0.6 0.6 6.6 7 0.6 13.4"></polyline></svg>
+        </span>
+      </span>
+    </a>
+  </div>
+
+  </div>
 
 
   <!-- =========================
