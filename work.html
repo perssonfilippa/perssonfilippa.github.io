@@ -8,9 +8,6 @@
 
   <title>Work – Filippa Persson</title>
 
-
-
-  <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 
@@ -26,31 +23,22 @@
   <style>
     :root { --nav-color: #949139; }
 
-    /* Navbaren (layout, vikt, aktiv länk) styrs av style.css och är lika på alla sidor. */
-
     :root {
-      --green: #949139;            /* tidslinjens färg */
+      --green: #949139;
       --work-text: #1f1f1a;
       --name-color: #000;
-      --content-gap: clamp(1.8rem, 3.6vw, 3.4rem);  /* avstånd mellan linjen och innehållet */
-      /* Tidslinjen ligger halvvägs mellan "Home" och det läge där linje + bild vore centrerade
-         som grupp. På smala skärmar hålls den alltid minst 1 rem till höger om "Home"
-         (--home-right mäts av scriptet längst ner). Projekten följer med ett fast avstånd. */
+      --content-gap: clamp(1.8rem, 3.6vw, 3.4rem);
       --home-right: 6rem;
-      --line-color: #000;          /* linjen och prickarna */
+      --line-color: #000;
       --line-centered: max(calc(var(--home-right) + 1.5rem), calc(50% - (var(--content-gap) + var(--media-max)) / 2));
       --line-x: max(calc(var(--home-right) + 1rem), calc((var(--line-centered) + var(--home-right)) / 2));
       --dot-size: 14px;
-      --media-max: 24rem;                         /* innehållets/bildens bredd, minska för mindre bilder */
+      --media-max: 24rem;
     }
 
     html { scroll-behavior: smooth; }
 
     body { background: #ECEDE9; }
-
-    /* =========================
-       TIDSLINJE
-    ========================= */
 
     .work {
       position: relative;
@@ -58,7 +46,6 @@
       min-height: 100vh;
     }
 
-    /* Den gröna linjen, hela sidans höjd */
     .work::before {
       content: "";
       position: absolute;
@@ -70,8 +57,6 @@
       transform: translateX(-50%);
     }
 
-    /* Innehållet ligger alltid ett fast avstånd (--content-gap) till höger om tidslinjen
-       och är --media-max brett, så projekten följer med när linjen flyttas. */
     .item {
       position: relative;
       padding-left: calc(var(--line-x) + var(--content-gap));
@@ -83,7 +68,6 @@
       margin-top: clamp(4rem, 9vw, 7rem);
     }
 
-    /* Pricken på linjen */
     .item::before {
       content: "";
       position: absolute;
@@ -114,10 +98,6 @@
       margin-bottom: 0.9rem;
     }
 
-    /* =========================
-       BILD + KORT BESKRIVNING
-    ========================= */
-
     .item__media {
       margin: 0;
     }
@@ -133,14 +113,9 @@
       color: var(--work-text);
       font-style: italic;
       font-weight: 300;
-      font-size: clamp(0.88rem, 1.1vw, 0.95rem);   /* max lika stor som Explore (0.95rem) */
+      font-size: clamp(0.88rem, 1.1vw, 0.95rem);
       line-height: 1.4;
     }
-
-    /* =========================
-       EXPLORE-KNAPP
-       Ingen ram eller cirkel: grön text med ett plus bredvid. När texten är utfälld blir plus ett minus.
-    ========================= */
 
     .item__toggle {
       display: inline-flex;
@@ -175,7 +150,6 @@
       stroke-linecap: round;
     }
 
-    /* det lodräta strecket försvinner => plus blir minus */
     .item__toggle .v {
       transform-origin: 12px 12px;
       transition: transform .3s ease;
@@ -183,7 +157,6 @@
 
     .item__toggle[aria-expanded="true"] .v { transform: scaleY(0); }
 
-    /* Close-knappen i panelen: bara text med ett minus till vänster */
     .panel__close {
       display: inline-flex;
       align-items: center;
@@ -215,10 +188,6 @@
       stroke-width: 2.4;
       stroke-linecap: round;
     }
-
-    /* =========================
-       MOBIL / APP: beskrivningen fälls ut under knappen
-    ========================= */
 
     .item__text { display: none; }
 
@@ -255,10 +224,6 @@
 
       .panel, .panel-shade { display: none; }
     }
-
-    /* =========================
-       PANEL FRÅN SIDAN
-    ========================= */
 
     .panel-shade {
       position: fixed;
@@ -326,12 +291,6 @@
 
     .panel__body p:last-child { margin-bottom: 0; }
 
-    /* =========================
-       BACK TO TOP BUTTON
-       Samma storlek och samma avstånd till kanten/botten som svartvitt-knappen
-       (värdena är lika med --corner-gap och --corner-size i theme.css).
-    ========================= */
-
     .scroll-to-top {
       position: fixed;
       bottom: 2rem;
@@ -368,10 +327,6 @@
       stroke-linejoin: round;
     }
 
-    /* =========================
-       RESPONSIVT
-    ========================= */
-
     @media (max-width: 900px) {
       :root { --content-gap: 2.2rem; }
       .work { padding: 16vh 0 8vh; }
@@ -389,10 +344,6 @@
 
 <body>
 
-  <!-- =========================
-       NAVIGATION
-  ========================= -->
-
   <nav class="nav" aria-label="Huvudmeny">
     <a href="index.html">Home</a>
 
@@ -402,14 +353,8 @@
     </div>
   </nav>
 
-
-  <!-- =========================
-       WORK (tidslinje)
-  ========================= -->
-
   <main class="work">
 
-    <!-- 01 CLAUDE POTATE -->
     <article class="item" id="claude-potate">
       <p class="item__year">2026</p>
       <h2 class="item__title">Claude Potate</h2>
@@ -446,7 +391,6 @@
     </article>
 
 
-    <!-- 02 REBRANDING (GET YOUR GUIDE) -->
     <article class="item" id="get-your-guide">
       <p class="item__year">2026</p>
       <h2 class="item__title">Rebranding</h2>
@@ -489,7 +433,6 @@
     </article>
 
 
-    <!-- 03 HERMIND -->
     <article class="item" id="hermind">
       <p class="item__year">2026</p>
       <h2 class="item__title">herMIND</h2>
@@ -518,15 +461,14 @@
     </article>
 
 
-    <!-- 04 SYNC -->
     <article class="item" id="sync">
       <p class="item__year">2026</p>
       <h2 class="item__title">Sync</h2>
       <figure class="item__media">
         <img src="Sync.png" alt="Sync">
       </figure>
-      <p class="item__caption">Sync is a meeting service meant to replace 
-        unnecessary business trips, making digital meetings feel 
+      <p class="item__caption">Sync is a meeting service meant to replace
+        unnecessary business trips, making digital meetings feel
         more engaging and real.</p>
       <button class="item__toggle" type="button" aria-expanded="false">
         <span class="item__toggle-label">Explore</span>
@@ -546,7 +488,6 @@
     </article>
 
 
-    <!-- 05 50K -->
     <article class="item" id="running">
       <p class="item__year">2025</p>
       <h2 class="item__title">50K</h2>
@@ -569,7 +510,6 @@
     </article>
 
 
-    <!-- 06 DUNGEON MASTER -->
     <article class="item" id="dungeon-master">
       <p class="item__year">2025</p>
       <h2 class="item__title">Dungeon Master</h2>
@@ -595,7 +535,6 @@
     </article>
 
 
-    <!-- 07 ANDRUM -->
     <article class="item" id="andrum">
       <p class="item__year">2025</p>
       <h2 class="item__title">ANDRUM</h2>
@@ -621,7 +560,6 @@
     </article>
 
 
-    <!-- 08 APICE -->
     <article class="item" id="apice">
       <p class="item__year">2024</p>
       <h2 class="item__title">APICE</h2>
@@ -644,7 +582,6 @@
     </article>
 
 
-    <!-- 09 MICKI GLASSBIL -->
     <article class="item" id="micki">
       <p class="item__year">2022</p>
       <h2 class="item__title">Micki Glassbil</h2>
@@ -671,7 +608,6 @@
 
   </main>
 
-  <!-- Panel från sidan: fylls med projektets text när man klickar Explore -->
   <div class="panel-shade" id="panelShade"></div>
   <aside class="panel" id="panel" role="dialog" aria-modal="true" aria-labelledby="panelTitle" inert>
     <button class="panel__close" id="panelClose" type="button">
@@ -683,7 +619,6 @@
     <div class="panel__body" id="panelBody"></div>
   </aside>
 
-  <!-- Back to top knappen (visas endast när man scrollat ner) -->
   <button class="scroll-to-top" id="scrollTopBtn" aria-label="Tillbaka till toppen" type="button">
     <svg viewBox="0 0 24 24">
       <polyline points="18 15 12 9 6 15"></polyline>
@@ -692,7 +627,6 @@
 
 
   <script>
-    /* ---- Panel från sidan ---- */
     const panel      = document.getElementById('panel');
     const panelShade = document.getElementById('panelShade');
     const panelClose = document.getElementById('panelClose');
@@ -701,9 +635,6 @@
     const panelBody  = document.getElementById('panelBody');
     let lastTrigger = null;
 
-    // Gamla sättet (utfällning under knappen): app/mobil och halv skärm på dator.
-    // Nya sättet (panel från sidan): iPad liggande, helskärm och större.
-    // En iPad (pekskärm) i stående läge får gamla sättet, liggande får panelen.
     const mobile = window.matchMedia('(max-width: 740px), (max-width: 900px) and (pointer: fine), (max-width: 1100px) and (orientation: portrait), (max-height: 500px) and (orientation: landscape), (max-width: 1100px) and (pointer: coarse) and (orientation: portrait)');
 
     function openPanel(item, trigger) {
@@ -723,7 +654,6 @@
       if (lastTrigger) lastTrigger.focus();
     }
 
-    // Mobil: texten fälls ut under knappen
     function setInline(item, open) {
       const btn = item.querySelector('.item__toggle');
       item.querySelector('.item__text').classList.toggle('is-open', open);
@@ -744,7 +674,6 @@
       });
     });
 
-    // Byter man mellan mobil och dator återställs allt
     mobile.addEventListener('change', () => {
       if (document.body.classList.contains('panel-open')) closePanel();
       document.querySelectorAll('.item').forEach(item => setInline(item, false));
@@ -756,7 +685,6 @@
       if (e.key === 'Escape' && document.body.classList.contains('panel-open')) closePanel();
     });
 
-    /* ---- Länk som work.html#hermind öppnar det projektet direkt ---- */
     const hashItem = location.hash ? document.getElementById(location.hash.slice(1)) : null;
     if (hashItem && hashItem.classList.contains('item')) {
       hashItem.scrollIntoView({ block: 'start' });
@@ -764,7 +692,6 @@
       else openPanel(hashItem, hashItem.querySelector('.item__toggle'));
     }
 
-    /* ---- Tidslinjen håller sig till höger om "Home", även när fönstret blir smalare ---- */
     (function () {
       const home = document.querySelector('.nav a');
       if (!home) return;
@@ -778,7 +705,6 @@
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
     })();
 
-    /* ---- Back to top-knapp ---- */
     const scrollTopBtn = document.getElementById('scrollTopBtn');
 
     window.addEventListener('scroll', () => {
@@ -791,12 +717,9 @@
   </script>
 
   <script>
-    /* ---- Beskär bort tom kant (genomskinlig eller enfärgad) i projektbilderna.
-            Snabbt: söker av en liten kopia (max 300 px) och beskär med CSS,
-            utan att koda om bilden, så ingenting fördröjs eller hoppar. ---- */
     document.querySelectorAll('.item__media img').forEach(img => {
       function trim() {
-        if (img.dataset.trimmed || img.hasAttribute('data-notrim')) return;   // data-notrim = beskär inte denna bild
+        if (img.dataset.trimmed || img.hasAttribute('data-notrim')) return;
         const nw = img.naturalWidth, nh = img.naturalHeight;
         if (!nw || !nh) return;
         img.dataset.trimmed = '1';
@@ -834,7 +757,7 @@
           if (x1 < x0 || y1 < y0) return;
 
           const cw = x1 - x0 + 1, ch = y1 - y0 + 1;
-          if (cw >= w - 1 && ch >= h - 1) return;   // ingen tom kant
+          if (cw >= w - 1 && ch >= h - 1) return;
 
           const fig = img.parentElement;
           fig.style.overflow = 'hidden';
@@ -842,9 +765,8 @@
           img.style.width = (w / cw * 100) + '%';
           img.style.maxWidth = 'none';
           img.style.marginLeft = (-x0 / cw * 100) + '%';
-          img.style.marginTop = (-y0 / cw * 100) + '%';   // procent i marginal räknas på bredden
+          img.style.marginTop = (-y0 / cw * 100) + '%';
         } catch (e) {
-          /* t.ex. om sidan öppnas direkt som fil: visa bilden som den är */
         }
       }
       if (img.complete) trim(); else img.addEventListener('load', trim, { once: true });

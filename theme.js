@@ -1,15 +1,10 @@
-// Svartvitt-läge: knapp nere till vänster, valet sparas mellan sidorna.
-// Läggs i <head> (utan defer) så att rätt läge sätts direkt och sidan inte blinkar.
 (function () {
     var KEY = 'bw-mode';
     var root = document.documentElement;
     var btn = null, meta = null, origColor = null;
   
-    // Sidans två färger. Allt som har exakt någon av dem (text, bakgrund eller ram)
-    // blir svart respektive vitt i svartvitt-läget, även när färgen är hårdkodad
-    // och alltså inte går via en variabel.
-    var GREEN = 'rgb(148, 145, 57)';    // #949139
-    var BEIGE = 'rgb(236, 237, 233)';   // #ECEDE9
+    var GREEN = 'rgb(148, 145, 57)';
+    var BEIGE = 'rgb(236, 237, 233)';
     var PROPS = [['color', 'c'], ['backgroundColor', 'b'], ['borderTopColor', 'o']];
   
     function stored() {
@@ -25,8 +20,6 @@
       if (meta) meta.setAttribute('content', on ? '#000000' : origColor);
     }
   
-    // Märker element vars färger är grönt eller beige, mätt i vanligt läge.
-    // theme.css har reglerna som gör märkta element svarta/vita.
     function mark() {
       var list = [root, document.body].concat(
         Array.prototype.slice.call(document.body.querySelectorAll('*'))
@@ -47,8 +40,8 @@
   
     function remark() {
       var was = root.classList.contains('bw');
-      root.classList.add('bw-calc');           // stänger av övergångar en stund
-      if (was) root.classList.remove('bw');    // mät utan svartvitt-läget
+      root.classList.add('bw-calc');
+      if (was) root.classList.remove('bw');
       mark();
       if (was) root.classList.add('bw');
       requestAnimationFrame(function () {
@@ -56,7 +49,6 @@
       });
     }
   
-    // Direkt, innan sidan målas
     apply(stored());
   
     document.addEventListener('DOMContentLoaded', function () {
@@ -85,6 +77,5 @@
       remark();
     });
   
-    // När stilar och bilder är helt laddade, mät en gång till
     window.addEventListener('load', remark);
   })();
